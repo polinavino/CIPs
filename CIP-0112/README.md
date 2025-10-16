@@ -173,6 +173,11 @@ Native scripts are typically represented in JSON syntax. We propose the followin
 }
 ```
 
+### Changes to signatures
+
+Currently, the `txid`, i.e. the hash of the transaction body, is signed. We propose this is changed to signing the concatenation `txid ++ hash (required_observers)`. 
+
+The purpose of this change is to allow a special kind of light client intent processing. In particular, a super light client can have their intent (expressed as an observer script) fulfilled without ever seeing the transaction that does this. The LC only needs to obtain and sign the intent-txid pair.
 
 ## Rationale: how does this CIP achieve its goals?
 
